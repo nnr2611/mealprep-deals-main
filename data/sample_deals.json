@@ -1,0 +1,194 @@
+[
+ {
+  "store": "No Frills",
+  "item": "chicken thighs",
+  "price": 6.59,
+  "unit": "kg",
+  "regular_price": 11.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Loblaws",
+  "item": "chicken thighs",
+  "price": 8.99,
+  "unit": "kg",
+  "regular_price": 11.5,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Metro",
+  "item": "chicken breast",
+  "price": 9.9,
+  "unit": "kg",
+  "regular_price": 15.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "FreshCo",
+  "item": "chicken breast",
+  "price": 8.8,
+  "unit": "kg",
+  "regular_price": 14.5,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Walmart",
+  "item": "ground beef",
+  "price": 8.5,
+  "unit": "kg",
+  "regular_price": 12.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "No Frills",
+  "item": "ground beef",
+  "price": 9.2,
+  "unit": "kg",
+  "regular_price": 12.5,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Sobeys",
+  "item": "salmon",
+  "price": 17.0,
+  "unit": "kg",
+  "regular_price": 26.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Food Basics",
+  "item": "salmon",
+  "price": 19.0,
+  "unit": "kg",
+  "regular_price": 26.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "No Frills",
+  "item": "eggs",
+  "price": 3.49,
+  "unit": "each",
+  "regular_price": 5.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Walmart",
+  "item": "eggs",
+  "price": 3.29,
+  "unit": "each",
+  "regular_price": 4.8,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Food Basics",
+  "item": "rolled oats",
+  "price": 1.99,
+  "unit": "kg",
+  "regular_price": 3.5,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Walmart",
+  "item": "brown rice",
+  "price": 2.2,
+  "unit": "kg",
+  "regular_price": 3.9,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "No Frills",
+  "item": "pasta",
+  "price": 1.0,
+  "unit": "kg",
+  "regular_price": 2.4,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Metro",
+  "item": "lentils",
+  "price": 2.5,
+  "unit": "kg",
+  "regular_price": 4.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Food Basics",
+  "item": "broccoli",
+  "price": 1.99,
+  "unit": "kg",
+  "regular_price": 3.5,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "FreshCo",
+  "item": "spinach",
+  "price": 2.99,
+  "unit": "each",
+  "regular_price": 4.5,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Walmart",
+  "item": "carrots",
+  "price": 1.2,
+  "unit": "kg",
+  "regular_price": 2.2,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Food Basics",
+  "item": "onion",
+  "price": 1.1,
+  "unit": "kg",
+  "regular_price": 2.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "No Frills",
+  "item": "sweet potatoes",
+  "price": 1.8,
+  "unit": "kg",
+  "regular_price": 3.0,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Metro",
+  "item": "bananas",
+  "price": 1.1,
+  "unit": "kg",
+  "regular_price": 1.6,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "No Frills",
+  "item": "canned tomatoes",
+  "price": 0.99,
+  "unit": "each",
+  "regular_price": 1.7,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Loblaws",
+  "item": "greek yogurt",
+  "price": 4.5,
+  "unit": "each",
+  "regular_price": 6.5,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Walmart",
+  "item": "chickpeas",
+  "price": 0.89,
+  "unit": "each",
+  "regular_price": 1.4,
+  "valid_until": "2026-10-29"
+ },
+ {
+  "store": "Sobeys",
+  "item": "tofu",
+  "price": 1.99,
+  "unit": "each",
+  "regular_price": 3.0,
+  "valid_until": "2026-10-29"
+ }
+]
