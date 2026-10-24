@@ -4,9 +4,11 @@ Drop a bigger CSV at data/nutrition.csv with the same columns to replace the sam
 import csv
 import difflib
 import os
+from pathlib import Path
 
-DATA = os.environ.get("NUTRITION_CSV") or (
-    "data/nutrition.csv" if os.path.exists("data/nutrition.csv") else "data/nutrition_sample.csv"
+_DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+DATA = os.environ.get("NUTRITION_CSV") or str(
+    _DATA_DIR / "nutrition.csv" if (_DATA_DIR / "nutrition.csv").exists() else _DATA_DIR / "nutrition_sample.csv"
 )
 
 # grams per unit (rough household conversions; liquids/powders treated as ~water)

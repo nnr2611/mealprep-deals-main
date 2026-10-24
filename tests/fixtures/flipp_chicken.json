@@ -1,0 +1,40 @@
+{
+ "items": [
+  {
+   "merchant_name": "Real Canadian Superstore",
+   "name": "CHICKEN THIGHS",
+   "current_price": 3.49,
+   "original_price": null,
+   "post_price_text": "LB",
+   "sale_story": "SAVE UP TO 25%",
+   "valid_to": "2026-10-29T03:59:59+00:00"
+  },
+  {
+   "merchant_name": "Adonis",
+   "name": "HALAL BONELESS CHICKEN THIGHS",
+   "current_price": 6.49,
+   "original_price": null,
+   "post_price_text": "/lb",
+   "sale_story": "23% SAVINGS",
+   "valid_to": "2026-10-29T03:59:59+00:00"
+  },
+  {
+   "merchant_name": "Sobeys",
+   "name": "Marinated Fresh Boneless Skinless Chicken Thighs",
+   "current_price": 7.99,
+   "original_price": null,
+   "post_price_text": "/lb",
+   "sale_story": "READY FOR YOU",
+   "valid_to": "2026-10-29T03:59:59+00:00"
+  },
+  {
+   "merchant_name": "Highland Farms",
+   "name": "Fresh Ontario Chicken Thighs",
+   "current_price": 6.99,
+   "original_price": null,
+   "post_price_text": "/lb 15.41/kg",
+   "sale_story": null,
+   "valid_to": "2026-10-29T03:59:59+00:00"
+  }
+ ]
+}

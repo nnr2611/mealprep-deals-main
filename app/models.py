@@ -27,6 +27,5 @@ class PlannedMeal(BaseModel):
 
 class MealPlan(BaseModel):
     meals: list[PlannedMeal]
-    shopping_list: list[str] = Field(description="Items to buy, each tagged with the store to buy it at")
     prep_schedule: list[str] = Field(description="Ordered batch-cooking steps for the prep session")
     summary: str

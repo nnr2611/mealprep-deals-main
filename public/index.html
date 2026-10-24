@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MealPrep Deals</title>
+<meta name="description" content="Turn your recipe books and this week's grocery flyer deals into a batch-cook meal plan.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f7a4d'/%3E%3Cpath d='M9 17h14a7 7 0 0 1-14 0zM12 13c0-2 2-2 2-4M17 13c0-2 2-2 2-4' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f5f0;--surface:#fff;--surface-2:#f0efe8;--fg:#1c1f1d;--muted:#5f6661;--line:#e2e1d8;
+  --accent:#1f7a4d;--accent-fg:#fff;--accent-soft:#e3f2e9;--warn:#a85d00;--warn-soft:#fdf0dc;--bad:#b3261e;--bad-soft:#fde8e6;
+  --shadow:0 1px 2px rgba(20,30,25,.06),0 4px 16px rgba(20,30,25,.05);--r:14px
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#121513;--surface:#1b1f1c;--surface-2:#242925;--fg:#eceee9;--muted:#9aa39c;--line:#2e342f;
+  --accent:#4cc589;--accent-fg:#06210f;--accent-soft:#17301f;--warn:#f0b35a;--warn-soft:#352610;--bad:#ff8a80;--bad-soft:#3a1a18;
+  --shadow:0 1px 2px rgba(0,0,0,.4)}}
+:root[data-theme=dark]{
+  --bg:#121513;--surface:#1b1f1c;--surface-2:#242925;--fg:#eceee9;--muted:#9aa39c;--line:#2e342f;
+  --accent:#4cc589;--accent-fg:#06210f;--accent-soft:#17301f;--warn:#f0b35a;--warn-soft:#352610;--bad:#ff8a80;--bad-soft:#3a1a18;
+  --shadow:0 1px 2px rgba(0,0,0,.4)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{line-height:1.2;margin:0}
+button,input,textarea{font:inherit;color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.logo{width:32px;height:32px;border-radius:9px;background:var(--accent);display:grid;place-items:center}
+.logo svg{width:20px;height:20px}
+.spacer{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 14px;cursor:pointer;font-weight:600;font-size:15px;min-height:40px}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--accent);color:var(--accent-fg);border-color:transparent}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.sm{padding:5px 10px;min-height:32px;font-size:14px}
+.btn.ghost{border-color:transparent;background:none;color:var(--muted)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--bad)}
+.dot.ok{background:var(--accent)}
+.hero{padding:36px 0 8px}
+.hero h1{font-size:clamp(28px,5vw,42px);letter-spacing:-.02em}
+.hero p{color:var(--muted);max-width:60ch;margin:10px 0 0;font-size:17px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:20px;margin:18px 0}
+.card>h2{font-size:19px;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.num{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-size:14px;font-weight:700}
+label{display:block;font-size:14px;font-weight:600;margin:0 0 5px}
+input[type=text],input[type=number],textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
+textarea{resize:vertical}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:700px){.grid4{grid-template-columns:1fr 1fr}}
+.hint{color:var(--muted);font-size:14px}
+.drop{border:2px dashed var(--line);border-radius:12px;padding:22px;text-align:center;cursor:pointer;background:var(--bg);transition:.15s}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop b{display:block}
+.recipes{margin:14px 0 0;display:grid;gap:8px}
+.recipe{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.recipe input{width:18px;height:18px;accent-color:var(--accent)}
+.recipe .name{flex:1;min-width:0}
+.recipe .name div:first-child{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.status{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:14px;display:none}
+.status.show{display:block}
+.status.info{background:var(--accent-soft);color:var(--accent)}
+.status.err{background:var(--bad-soft);color:var(--bad)}
+.status.warn{background:var(--warn-soft);color:var(--warn)}
+.spin{width:16px;height:16px;border-radius:50%;border:2.5px solid currentColor;border-right-color:transparent;animation:r .7s linear infinite;display:inline-block;vertical-align:-3px;margin-right:8px}
+@keyframes r{to{transform:rotate(360deg)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:6px}
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}}
+.stat{background:var(--surface-2);border-radius:12px;padding:14px}
+.stat .v{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.stat .l{font-size:13px;color:var(--muted)}
+.res h3{font-size:17px;margin:26px 0 12px}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.badge.warn{background:var(--warn-soft);color:var(--warn)}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:160px 1fr 110px;gap:12px;align-items:center;font-size:14px}
+.bar .track{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar .fill{height:100%;background:var(--accent);border-radius:99px}
+@media(max-width:600px){.bar{grid-template-columns:110px 1fr 70px;gap:8px}.bar .s{font-size:12px}}
+.week{display:grid;grid-template-columns:90px repeat(var(--cols),minmax(0,1fr));gap:6px;overflow-x:auto}
+.week .h{font-size:13px;font-weight:700;color:var(--muted);padding:4px}
+.week .rl{font-size:13px;font-weight:600;color:var(--muted);padding:8px 4px;text-transform:capitalize}
+.cell{background:var(--surface-2);border-radius:10px;padding:8px;font-size:13px;line-height:1.35;min-height:64px}
+.cell small{display:block;color:var(--muted);margin-top:4px}
+@media(max-width:760px){.week{grid-template-columns:1fr;gap:6px}.week .h:first-child{display:none}.week .h{padding-top:12px;color:var(--fg);font-size:15px}.week .rl{padding:0 4px}}
+.store{border:1px solid var(--line);border-radius:12px;margin:0 0 10px;overflow:hidden}
+.store>summary{padding:12px 14px;cursor:pointer;font-weight:700;display:flex;gap:10px;align-items:center;list-style:none;background:var(--surface-2)}
+.store>summary::-webkit-details-marker{display:none}
+.store>summary .t{margin-left:auto;font-weight:600;color:var(--muted);font-size:14px}
+.item{display:flex;gap:10px;align-items:center;padding:9px 14px;border-top:1px solid var(--line);font-size:15px}
+.item input{width:18px;height:18px;accent-color:var(--accent);flex:none}
+.item .q{color:var(--muted);font-size:13px;margin-left:auto;text-align:right}
+.item.done .n{text-decoration:line-through;color:var(--muted)}
+ol.prep{padding-left:0;list-style:none;counter-reset:s;display:grid;gap:10px}
+ol.prep li{counter-increment:s;display:flex;gap:12px;align-items:flex-start}
+ol.prep li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-size:13px;margin-top:1px}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td.wrap-t{white-space:normal;min-width:160px}
+th{color:var(--muted);font-weight:600;font-size:13px}
+.summary{background:var(--surface-2);border-radius:12px;padding:14px 16px;margin:14px 0 4px}
+dialog{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:var(--fg);padding:22px;max-width:460px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog h2{font-size:19px;margin-bottom:8px}
+.row{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+footer{color:var(--muted);font-size:13px;padding:10px 0 40px}
+[hidden]{display:none!important}
+</style></head><body>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><span class="logo"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M7 17h18a9 9 0 0 1-18 0zM12 13c0-2.5 2.5-2.5 2.5-5M18 13c0-2.5 2.5-2.5 2.5-5"/></svg></span>MealPrep Deals</div>
+  <span class="spacer"></span>
+  <button class="btn" id="keyBtn" aria-haspopup="dialog"><span class="dot" id="keyDot"></span><span id="keyLabel">API key</span></button>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Cook once. Eat well all week.<br>Pay less.</h1>
+    <p>Add your recipe books, and we'll build a batch-cook week around what's actually on sale in your neighbourhood flyers, with cost and calories calculated in code.</p>
+  </section>
+
+  <section class="card" aria-labelledby="h1">
+    <h2 id="h1"><span class="num">1</span>Your recipes</h2>
+    <label class="drop" id="drop" for="file">
+      <b>Drop a recipe book here or click to browse</b>
+      <span class="hint">PDF, .txt or .md, up to 4&nbsp;MB. Claude reads it and extracts the full recipes.</span>
+      <input id="file" type="file" accept=".pdf,.txt,.md" hidden>
+    </label>
+    <div class="status" id="upStatus" role="status"></div>
+    <div class="recipes" id="recipes"></div>
+    <div class="row" id="recipeTools" hidden style="justify-content:space-between;align-items:center">
+      <span class="hint" id="recipeCount"></span>
+      <button class="btn sm ghost" id="clearAll">Remove all</button>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="h2">
+    <h2 id="h2"><span class="num">2</span>Plan my week</h2>
+    <div class="grid4">
+      <div><label for="pc">Postal code</label><input id="pc" type="text" placeholder="M5V 2T6" autocomplete="postal-code" maxlength="7"></div>
+      <div><label for="people">People</label><input id="people" type="number" value="1" min="1" max="12"></div>
+      <div><label for="kcal">kcal / person / day</label><input id="kcal" type="number" value="2000" min="800" max="6000" step="50"></div>
+      <div><label for="prot">Protein g / day</label><input id="prot" type="number" value="100" min="0" max="400" step="5"></div>
+    </div>
+    <div style="margin-top:14px"><label for="notes">Notes (allergies, dislikes)</label>
+      <textarea id="notes" rows="2" maxlength="1000" placeholder="e.g. no shellfish, vegetarian dinners on weekdays"></textarea></div>
+    <div class="row" style="justify-content:flex-start;align-items:center">
+      <button class="btn primary" id="go">Find deals &amp; build plan</button>
+    </div>
+    <div class="status" id="status" role="status"></div>
+  </section>
+
+  <section class="card res" id="out" hidden aria-live="polite"></section>
+  <footer>Prices come from flyers and can change or be wrong. Check the store before you shop. Calories are estimates from a nutrition table.</footer>
+</main>
+
+<dialog id="keyDlg">
+  <form method="dialog" id="keyForm">
+    <h2>Anthropic API key</h2>
+    <p class="hint" style="margin:0 0 12px">This site uses your own key so it costs nothing to host. It is saved only in this browser and sent with each request so the server can call Claude for you. The server does not store it.
+      Get one at <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>.</p>
+    <label for="keyIn">API key</label>
+    <input id="keyIn" type="password" placeholder="sk-ant-…" autocomplete="off" spellcheck="false">
+    <div class="row">
+      <button class="btn ghost" id="keyClear" type="button">Remove</button>
+      <button class="btn" value="cancel">Cancel</button>
+      <button class="btn primary" id="keySave" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>new Intl.NumberFormat('en-CA',{style:'currency',currency:'CAD'}).format(n);
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch{return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}},
+  del(k){try{localStorage.removeItem(k)}catch{}}
+};
+let key=store.get('mp.key','');
+let recipes=store.get('mp.recipes',[]);
+store.get('mp.form',null)&&Object.entries(store.get('mp.form')).forEach(([k,v])=>{if($(k))$(k).value=v});
+
+function show(el,kind,html){el.className='status show '+kind;el.innerHTML=html}
+function hide(el){el.className='status'}
+const spinner='<span class="spin"></span>';
+
+async function api(url,opts={}){
+  opts.headers={...(opts.headers||{}),...(key?{'X-Anthropic-Key':key}:{})};
+  let r;try{r=await fetch(url,opts)}catch{throw new Error('Could not reach the server. Check your connection.')}
+  const text=await r.text();let j=null;try{j=JSON.parse(text)}catch{}
+  if(!r.ok){
+    const d=j&&j.detail;
+    throw new Error(typeof d==='string'?d:Array.isArray(d)?'Please check your inputs: '+d.map(x=>(x.loc||[]).slice(-1)[0]+' '+x.msg).join('; '):
+      r.status===504||r.status===408?'The request timed out. Try a smaller book or fewer recipes.':`Server error (${r.status}). Please try again.`)}
+  if(!j)throw new Error('The server sent an unexpected response.');
+  return j}
+
+/* ---- API key ---- */
+function renderKey(){$('keyDot').classList.toggle('ok',!!key);$('keyLabel').textContent=key?'API key set':'Add API key'}
+$('keyBtn').onclick=()=>{$('keyIn').value=key;$('keyDlg').showModal()};
+$('keyForm').addEventListener('submit',e=>{if(e.submitter&&e.submitter.value==='save'){key=$('keyIn').value.trim();key?store.set('mp.key',key):store.del('mp.key');renderKey()}});
+$('keyClear').onclick=()=>{key='';store.del('mp.key');renderKey();$('keyDlg').close()};
+renderKey();
+
+/* ---- recipes ---- */
+function saveRecipes(){store.set('mp.recipes',recipes);renderRecipes()}
+function renderRecipes(){
+  $('recipes').innerHTML=recipes.map((r,i)=>`<label class="recipe"><input type="checkbox" data-i="${i}" ${r.on!==false?'checked':''} aria-label="Include ${esc(r.name)}">
+    <span class="name"><div title="${esc(r.name)}">${esc(r.name)}</div><div class="hint">${r.servings} serving${r.servings==1?'':'s'} · ${r.ingredients.length} ingredients${r.book?' · '+esc(r.book):''}</div></span>
+    <button class="btn sm ghost" data-del="${i}" aria-label="Remove ${esc(r.name)}">Remove</button></label>`).join('');
+  const n=recipes.filter(r=>r.on!==false).length;
+  $('recipeTools').hidden=!recipes.length;
+  $('recipeCount').textContent=`${n} of ${recipes.length} recipe${recipes.length==1?'':'s'} selected · saved in this browser`}
+$('recipes').addEventListener('change',e=>{if(e.target.dataset.i!=null){recipes[+e.target.dataset.i].on=e.target.checked;saveRecipes()}});
+$('recipes').addEventListener('click',e=>{const i=e.target.dataset.del;if(i!=null){e.preventDefault();recipes.splice(+i,1);saveRecipes()}});
+$('clearAll').onclick=()=>{if(confirm('Remove all saved recipes?')){recipes=[];saveRecipes()}};
+
+async function upload(file){
+  if(!file)return;
+  if(!key){$('keyBtn').click();return}
+  if(file.size>4*1024*1024){show($('upStatus'),'err','That file is over 4 MB. Split the book into smaller parts.');return}
+  show($('upStatus'),'info',spinner+'Reading the book and extracting recipes. This can take a minute…');
+  const fd=new FormData();fd.append('file',file);
+  try{
+    const j=await api('/api/extract',{method:'POST',body:fd});
+    const book=file.name.replace(/\.[^.]+$/,'');
+    recipes.push(...j.recipes.map(r=>({...r,book,on:true})));saveRecipes();
+    show($('upStatus'),j.recipes.length?(j.truncated?'warn':'info'):'warn',
+      j.recipes.length?`Added ${j.recipes.length} recipe${j.recipes.length==1?'':'s'}.${j.truncated?' The book was long, so only the first part was read.':''}`:'No complete recipes were found in that file.')
+  }catch(x){show($('upStatus'),'err',esc(x.message))}
+  $('file').value=''}
+$('file').onchange=e=>upload(e.target.files[0]);
+['dragenter','dragover'].forEach(t=>$('drop').addEventListener(t,e=>{e.preventDefault();$('drop').classList.add('over')}));
+['dragleave','drop'].forEach(t=>$('drop').addEventListener(t,e=>{e.preventDefault();$('drop').classList.remove('over')}));
+$('drop').addEventListener('drop',e=>upload(e.dataTransfer.files[0]));
+
+/* ---- plan ---- */
+const FORM=['pc','people','kcal','prot','notes'];
+FORM.forEach(id=>$(id).addEventListener('change',()=>store.set('mp.form',Object.fromEntries(FORM.map(k=>[k,$(k).value])))));
+
+$('go').onclick=async()=>{
+  const picked=recipes.filter(r=>r.on!==false);
+  if(!key){$('keyBtn').click();return}
+  if(!picked.length){show($('status'),'err','Add and select at least one recipe first.');return}
+  if(!$('pc').value.trim()){show($('status'),'err','Enter your postal code to look up local flyer deals.');$('pc').focus();return}
+  $('go').disabled=true;$('out').hidden=true;
+  const t0=Date.now(),tick=setInterval(()=>show($('status'),'info',spinner+`Fetching this week's flyer deals and planning… ${Math.round((Date.now()-t0)/1000)}s`),500);
+  show($('status'),'info',spinner+"Fetching this week's flyer deals and planning…");
+  try{
+    const p=await api('/api/plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      postal_code:$('pc').value,people:+$('people').value||1,calories_per_day:+$('kcal').value||2000,protein_g_per_day:+$('prot').value||0,
+      notes:$('notes').value,recipes:picked.map(({name,servings,ingredients,steps})=>({name,servings,ingredients,steps}))})});
+    render(p);hide($('status'));$('out').scrollIntoView({behavior:'smooth',block:'start'})
+  }catch(x){show($('status'),'err',esc(x.message))}
+  finally{clearInterval(tick);$('go').disabled=false}};
+
+function weekGrid(meals){
+  const days=[...new Set(meals.map(m=>m.day))],types=['breakfast','lunch','dinner'];
+  const cell=(d,t)=>{const ms=meals.filter(m=>m.day===d&&m.meal.toLowerCase()===t);
+    return `<div class="cell">${ms.map(m=>`${esc(m.name)}<small>${m.servings} serving${m.servings==1?'':'s'} · ${m.kcal} kcal</small>`).join('<hr style="border:0;border-top:1px solid var(--line);margin:6px 0">')||'<small>-</small>'}</div>`};
+  return `<div class="week" style="--cols:${days.length}"><div class="h"></div>${days.map(d=>`<div class="h">${esc(d)}</div>`).join('')}
+    ${types.map(t=>`<div class="rl">${t}</div>${days.map(d=>cell(d,t)).join('')}`).join('')}</div>`}
+
+function shopping(list){
+  const g={};list.forEach(i=>(g[i.store||'Pantry & unmatched items']??=[]).push(i));
+  return Object.entries(g).map(([s,items],n)=>{
+    const tot=items.reduce((a,i)=>a+(i.est_cost||0),0);
+    return `<details class="store" ${n<4?'open':''}><summary>${esc(s)} <span class="badge">${items.length}</span><span class="t">${tot?money(tot)+' est.':''}</span></summary>
+      ${items.map(i=>`<label class="item"><input type="checkbox"><span class="n">${esc(i.name)}</span><span class="q">${+i.quantity.toFixed(1)} ${esc(i.unit)}${i.deal?`<br>${esc(i.deal)}`:''}</span></label>`).join('')}</details>`}).join('')}
+
+function render(p){
+  const t=p.totals,maxN=Math.max(...p.stores.map(s=>s.best_prices),1);
+  const sample=p.deals_source==='sample';
+  $('out').innerHTML=`
+  <h2 style="font-size:22px">Your week ${sample?'<span class="badge warn">Sample prices</span>':'<span class="badge">Live flyer deals</span>'}</h2>
+  ${sample?'<div class="status show warn" style="margin:12px 0 0">This site is using bundled sample prices, not real flyers. Run it locally for live flyer deals.</div>':''}
+  <div class="summary">${esc(p.summary)}</div>
+  <div class="stats" style="margin-top:14px">
+    <div class="stat"><div class="v">${money(t.estimated_cost_cad)}</div><div class="l">Est. cost of on-sale ingredients${t.priced_pct!=null?` (${t.priced_pct}% of ingredients priced)`:''}</div></div>
+    <div class="stat"><div class="v">${t.avg_kcal_per_person_per_day}</div><div class="l">kcal / person / day (target ${t.target_kcal})</div></div>
+    <div class="stat"><div class="v">${new Set(p.shopping_list.map(i=>i.store).filter(Boolean)).size}</div><div class="l">stores to visit</div></div>
+    <div class="stat"><div class="v">${p.deals.length}</div><div class="l">flyer deals matched</div></div>
+  </div>
+  <h3>Where to shop</h3>
+  <div class="bars">${p.stores.map(s=>`<div class="bar"><span class="s">${esc(s.store)}</span><div class="track"><div class="fill" style="width:${100*s.best_prices/maxN}%"></div></div><span>${s.best_prices} best${s.avg_discount_pct?` · ${s.avg_discount_pct}% off`:''}</span></div>`).join('')||'<span class="hint">No matching deals found for your recipes this week.</span>'}</div>
+  <h3>Weekly plan</h3>${weekGrid(p.meals)}
+  <h3>Shopping list</h3><p class="hint" style="margin:-4px 0 10px">Amounts are what the recipes need; buy the nearest package size.</p>${shopping(p.shopping_list)}
+  <h3>Prep day</h3><ol class="prep">${p.prep_schedule.map(s=>`<li><span>${esc(s)}</span></li>`).join('')}</ol>
+  <h3>This week's best deals</h3><div class="tablewrap"><table><tr><th>Ingredient</th><th>Product</th><th>Store</th><th>Price</th><th>Discount</th><th>Until</th></tr>
+  ${p.deals.map(d=>`<tr><td>${esc(d.item)}</td><td class="wrap-t">${esc(d.product||'')}</td><td>${esc(d.store)}</td><td><b>${money(d.price)}</b> / ${esc(d.unit)}</td>
+    <td>${d.regular_price?`<span class="badge">${Math.round(100*(1-d.price/d.regular_price))}% off</span>`:'-'}</td><td>${esc(d.valid_until||'')}</td></tr>`).join('')}</table></div>`;
+  $('out').hidden=false}
+document.addEventListener('change',e=>{if(e.target.closest('.item'))e.target.closest('.item').classList.toggle('done',e.target.checked)});
+renderRecipes();
+</script></body></html>
